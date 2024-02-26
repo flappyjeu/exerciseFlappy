@@ -23,17 +23,17 @@ public class ControlleFlappy : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
-            vitesseX = -3;
+            vitesseX = -2;
         }
         else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
-            vitesseX = 3;
+            vitesseX = 2;
         }
 
 
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
-            vitesseY = 8;
+            vitesseY = 7;
         }
         else
         {
