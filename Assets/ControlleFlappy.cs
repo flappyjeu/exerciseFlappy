@@ -9,7 +9,9 @@ public class ControlleFlappy : MonoBehaviour
     public float vitesseY;
     public float vitesseX;
     public Sprite flappyBlesse;
+    public Sprite flappyBlesseHaut;
     public Sprite flappyGuerit;
+    public Sprite flappyGueritHaut;
     public GameObject PieceOr;
     public GameObject PackVie;
     public GameObject Champignon;
@@ -44,6 +46,18 @@ public class ControlleFlappy : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
             vitesseY = 7;
+
+            if (blesse == false)
+            {
+                GetComponent<SpriteRenderer>().sprite = flappyGuerit;
+            }
+            else
+            {
+                GetComponent<SpriteRenderer>().sprite = flappyBlesse;
+            }
+
+
+            
         }
         else
         {
@@ -51,9 +65,23 @@ public class ControlleFlappy : MonoBehaviour
         }
 
 
-
         GetComponent<Rigidbody2D>().velocity = new Vector2(vitesseX, vitesseY);
+
+
+        if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.UpArrow))
+        {
+            if (blesse == false)
+            {
+                GetComponent<SpriteRenderer>().sprite = flappyGueritHaut;
+            }
+            else
+            {
+                GetComponent<SpriteRenderer>().sprite = flappyBlesseHaut;
+            }
+        }
     }
+
+
 
     void OnCollisionEnter2D(Collision2D infoCollision)
     {
@@ -65,7 +93,7 @@ public class ControlleFlappy : MonoBehaviour
                 if (blesse == false)
                 {
                     GetComponent<AudioSource>().PlayOneShot(SonCol);
-                    GetComponent<SpriteRenderer>().sprite = flappyBlesse; //change de sprite pour le flappy malade
+                    GetComponent<SpriteRenderer>().sprite = flappyBlesse;
                 }
 
                 else
