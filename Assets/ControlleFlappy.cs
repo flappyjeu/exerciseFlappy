@@ -23,6 +23,7 @@ public class ControlleFlappy : MonoBehaviour
     public AudioClip SonFinPartie;
     bool blesse;
     bool partieTerminer;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -153,6 +154,9 @@ public class ControlleFlappy : MonoBehaviour
         transform.localScale /= 2f;
     }
 
-
+    void relancerScene()
+    {
+        SceneManager.LoadScene(0);
+    }
 
 }
