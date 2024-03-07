@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ControlleFlappy : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class ControlleFlappy : MonoBehaviour
     public AudioClip SonChamp;
     public AudioClip SonFinPartie;
     bool blesse;
-    bool partieTerminee;
+    bool partieTerminer;
 
     // Start is called before the first frame update
     void Start()
@@ -59,13 +60,27 @@ public class ControlleFlappy : MonoBehaviour
         //si l'objet flappy touche une colonne le sprite change
         if (infoCollision.gameObject.name == "Colonne")
         {
-            blesse = true;
-            partieTerminee = true;
-            GetComponent<Rigidbody2D>().freezeRotation = false;
-            GetComponent<Collider2D>().enabled = false;
-            GetComponent<SpriteRenderer>().sprite = flappyBlesse;
-            GetComponent<AudioSource>().PlayOneShot(SonCol, 1f);
 
+            {
+                if (blesse == false)
+                {
+                    GetComponent<AudioSource>().PlayOneShot(SonCol);
+                    GetComponent<SpriteRenderer>().sprite = flappyBlesse; //change de sprite pour le flappy malade
+                }
+
+                else
+                {
+                    partieTerminer = true;
+                    GetComponent<Rigidbody2D>().freezeRotation = false;
+                    GetComponent<Collider2D>().enabled = false;
+                    GetComponent<AudioSource>().PlayOneShot(SonFinPartie);
+                    Invoke("relancerScene", 5f);
+                }
+
+                blesse = true;
+
+
+            }
         }
 
         else if (infoCollision.gameObject.name == "PieceOr")
